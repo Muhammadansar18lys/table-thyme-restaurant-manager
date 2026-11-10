@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A simple restaurant order and table management app.">
+<title>Table & Thyme | Restaurant Manager</title>
+<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body><div class="app-shell">
+<aside class="sidebar">
+<a class="brand" href="#top"><span class="brand-mark">T<span>&</span>T</span><span class="brand-copy"><strong>table & thyme</strong><small>RESTAURANT MANAGER</small></span></a>
+<div class="side-label">WORKSPACE</div><nav class="side-nav" aria-label="Main navigation"><a class="nav-link active" href="#overview"><span class="nav-icon">▦</span>Overview</a><a class="nav-link" href="#orders"><span class="nav-icon">▤</span>Orders <span class="nav-count" id="navOrderCount">0</span></a><a class="nav-link" href="#tables"><span class="nav-icon">▧</span>Tables</a></nav>
+<div class="sidebar-bottom"><div class="shift-card"><span class="shift-dot"></span><div><strong>Lunch service</strong><small>Kitchen is open</small></div></div><div class="profile"><div class="avatar">SM</div><div><strong>Shift manager</strong><small>Local workspace</small></div><span class="profile-more">···</span></div></div>
+</aside>
+<main id="top" class="main-content">
+<header class="topbar"><div class="mobile-brand"><span class="brand-mark">T<span>&</span>T</span><strong>table & thyme</strong></div><div class="breadcrumb">Workspace <span>/</span> <strong>Overview</strong></div><div class="top-actions"><span class="today-label" id="todayLabel"></span><button class="button button-primary" id="newOrderButton"><span>＋</span> New order</button></div></header>
+<section id="overview" class="page-heading"><div><p class="eyebrow">TODAY'S SERVICE <span class="live-dot"></span> LIVE</p><h1>Good afternoon.</h1><p class="subheading">Here’s what’s happening in your restaurant today.</p></div><div class="service-tag"><span class="service-icon">☼</span><span><strong>Lunch service</strong><small>11:00 AM – 4:00 PM</small></span></div></section>
+<section class="stats-grid" aria-label="Restaurant summary">
+<article class="stat-card"><div class="stat-top"><span>Today's sales</span><span class="stat-icon green">$</span></div><strong class="stat-value" id="salesValue">$0.00</strong><span class="stat-foot"><span class="trend">↗</span> From completed orders</span></article>
+<article class="stat-card"><div class="stat-top"><span>Open orders</span><span class="stat-icon amber">◷</span></div><strong class="stat-value" id="openOrdersValue">0</strong><span class="stat-foot">Being prepared or ready</span></article>
+<article class="stat-card"><div class="stat-top"><span>Tables occupied</span><span class="stat-icon blue">▧</span></div><strong class="stat-value"><span id="occupiedValue">0</span><small> / 8</small></strong><span class="stat-foot">Based on active orders</span></article>
+<article class="stat-card"><div class="stat-top"><span>Orders served</span><span class="stat-icon violet">✓</span></div><strong class="stat-value" id="servedValue">0</strong><span class="stat-foot">Completed this session</span></article></section>
+<section id="orders" class="content-panel"><div class="panel-heading"><div><h2>Order board</h2><p>Keep an eye on every table’s ticket.</p></div><button class="button button-light" id="refreshButton">↻ <span>Refresh</span></button></div>
+<div class="order-toolbar"><div class="filter-tabs" role="tablist" aria-label="Filter orders"><button class="filter-tab selected" data-filter="all">All <span id="allCount">0</span></button><button class="filter-tab" data-filter="preparing">Preparing</button><button class="filter-tab" data-filter="ready">Ready</button><button class="filter-tab" data-filter="served">Served</button></div><label class="search-box"><span>⌕</span><input id="orderSearch" type="search" placeholder="Search table or order" aria-label="Search orders"></label></div><div id="orderList" class="order-list" aria-live="polite"></div></section>
+<section id="tables" class="content-panel"><div class="panel-heading"><div><h2>Table status</h2><p>Tap a free table to start an order.</p></div><div class="table-legend"><span><i class="legend-dot occupied"></i>Occupied</span><span><i class="legend-dot available"></i>Available</span></div></div><div id="tableGrid" class="table-grid"></div></section>
+<footer class="footer-note">Table & Thyme <span>·</span> A simple demo workspace <span>·</span> Your data stays in this browser</footer>
+</main></div>
+<div class="modal-backdrop" id="orderModal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-heading"><div><p class="eyebrow">NEW TICKET</p><h2 id="modalTitle">Create an order</h2></div><button class="icon-button" id="closeModalButton" aria-label="Close dialog">×</button></div>
+<form id="orderForm"><div class="form-row"><label>Table<select id="tableSelect" name="table" required></select></label><label>Guests<input name="guests" type="number" min="1" max="12" value="2" required></label></div><div class="line-items-heading"><strong>Items</strong><span>Choose food and quantity</span></div><div id="itemRows"></div><button type="button" class="add-line-button" id="addItemButton">＋ Add another item</button><label class="notes-label">Kitchen note <span>OPTIONAL</span><textarea name="note" rows="2" placeholder="Allergies, no onions, extra sauce…"></textarea></label><div class="modal-total"><span>Order total</span><strong id="orderTotal">$0.00</strong></div><div class="modal-actions"><button type="button" class="button button-light" id="cancelModalButton">Cancel</button><button type="submit" class="button button-primary">Place order <span>→</span></button></div></form></section></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>
